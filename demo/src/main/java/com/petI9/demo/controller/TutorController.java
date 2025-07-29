@@ -1,19 +1,21 @@
 package com.petI9.demo.controller;
 
-import com.petI9.demo.domain.Tutor;
-import com.petI9.demo.application.TutorService;
+
 import org.springframework.web.bind.annotation.*;
+
+import com.petI9.demo.application.TutorServiceImpl;
+import com.petI9.demo.domain.Tutor;
+
 import java.util.List;
 
 @RestController
 @RequestMapping("/tutores")
 public class TutorController {
-    private final TutorService tutorService;
+    private final TutorServiceImpl tutorService;
 
-    public TutorController(TutorService tutorService) {
+    public TutorController(TutorServiceImpl tutorService) {
         this.tutorService = tutorService;
     }
-
     @PostMapping
     public Tutor cadastrarTutor(@RequestBody Tutor tutor) {
         return tutorService.cadastrarTutor(tutor);

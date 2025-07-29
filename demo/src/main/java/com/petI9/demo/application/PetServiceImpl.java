@@ -1,7 +1,6 @@
 package com.petI9.demo.application;
 
 import com.petI9.demo.domain.Pet;
-import com.petI9.demo.domain.Tutor;
 import com.petI9.demo.repository.PetRepository;
 import com.petI9.demo.repository.TutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -4,7 +4,7 @@ import jakarta.persistence.Embeddable;
 import java.time.LocalDate;
 
 @Embeddable
-public class Vaccine {
+public class Vacina {
     private String type;
     private LocalDate date;
     public String getType() { return type; }

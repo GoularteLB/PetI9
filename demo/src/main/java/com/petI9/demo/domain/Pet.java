@@ -17,10 +17,10 @@ public class Pet {
     private String color;
     private Double weight;
     @ElementCollection
-    private List<Vaccine> vaccines;
+    private List<Vacina> vaccines;
     @ManyToOne
-    @JoinColumn(name = "owner_id")
-    private Owner owner;
+    @JoinColumn(name = "tutor_id")
+    private Tutor tutor;
 
     public enum Breed {
         LABRADOR, POODLE, BULLDOG, SIAMESE, PERSIAN, OTHER
@@ -40,8 +40,8 @@ public class Pet {
     public void setColor(String color) { this.color = color; }
     public Double getWeight() { return weight; }
     public void setWeight(Double weight) { this.weight = weight; }
-    public List<Vaccine> getVaccines() { return vaccines; }
-    public void setVaccines(List<Vaccine> vaccines) { this.vaccines = vaccines; }
-    public Owner getOwner() { return owner; }
-    public void setOwner(Owner owner) { this.owner = owner; }
+    public List<Vacina> getVaccines() { return vaccines; }
+    public void setVaccines(List<Vacina> vaccines) { this.vaccines = vaccines; }
+    public Tutor getOwner() { return tutor; }
+    public void setOwner(Tutor tutor) { this.tutor = tutor; }
 }

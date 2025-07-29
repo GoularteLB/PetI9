@@ -5,14 +5,14 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-public class Owner {
+public class Tutor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String nickname;
     private LocalDate birthDate;
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "tutor", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Pet> pets;
 
     public Long getId() { return id; }
