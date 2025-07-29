@@ -24,11 +24,13 @@ public class TutorController {
         return tutorService.consultarPorId(id);
     }
 
-    @GetMapping
-    public List<Tutor> consultarPorNome(@RequestParam(required = false) String nome) {
-        if (nome == null || nome.isEmpty()) {
-            return tutorService.listarTodos();
-        }
+    @GetMapping("/search")
+    public List<Tutor> consultarPorNome(@RequestParam String nome) {
         return tutorService.consultarPorNome(nome);
+    }
+
+    @GetMapping
+    public List<Tutor> listarTodos() {
+        return tutorService.listarTodos();
     }
 }

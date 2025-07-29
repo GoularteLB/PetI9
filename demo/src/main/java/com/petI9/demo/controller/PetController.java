@@ -24,17 +24,19 @@ public class PetController {
         return petService.consultarPorId(id);
     }
 
-    @GetMapping
-    public List<Pet> consultarPorNome(@RequestParam(required = false) String nome) {
-        if (nome == null || nome.isEmpty()) {
-            return petService.listarPets();
-        }
-        return petService.consultarPorNome(nome);
+    @GetMapping("/search")
+    public List<Pet> consultarPorNome(@RequestParam String name) {
+        return petService.consultarPorNome(name);
     }
 
-    @PutMapping("/{id}/nome")
-    public Pet editarNome(@PathVariable Long id, @RequestBody String novoNome) {
-        return petService.editarNome(id, novoNome);
+    @GetMapping
+    public List<Pet> listarTodos() {
+        return petService.listarPets();
+    }
+
+    @PutMapping("/{id}/name")
+    public Pet editarNome(@PathVariable Long id, @RequestBody String newName) {
+        return petService.editarNome(id, newName);
     }
 
     @DeleteMapping("/{id}")
