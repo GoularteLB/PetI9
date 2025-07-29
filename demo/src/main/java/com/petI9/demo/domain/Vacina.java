@@ -1,12 +1,14 @@
 package com.petI9.demo.domain;
 
+import jakarta.persistence.Embeddable;
 import java.time.LocalDate;
 
-public class Vacina {
-    private String tipo;
-    private LocalDate data;
-    public String getTipo() { return tipo; }
-    public void setTipo(String tipo) { this.tipo = tipo; }
-    public LocalDate getData() { return data; }
-    public void setData(LocalDate data) { this.data = data; }
+@Embeddable
+public class Vaccine {
+    private String type;
+    private LocalDate date;
+    public String getType() { return type; }
+    public void setType(String type) { this.type = type; }
+    public LocalDate getDate() { return date; }
+    public void setDate(LocalDate date) { this.date = date; }
 }
