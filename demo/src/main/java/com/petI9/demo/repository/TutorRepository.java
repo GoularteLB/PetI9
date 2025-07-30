@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface TutorRepository extends JpaRepository<Tutor, Long> {
-    boolean existsByNomeIgnoreCase(String nome);
-    List<Tutor> findByNomeContainingIgnoreCase(String nome);
+    boolean existsByNameIgnoreCase(String name);
+    List<Tutor> findByNameContainingIgnoreCase(String name);
 }

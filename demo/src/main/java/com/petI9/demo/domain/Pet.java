@@ -44,4 +44,18 @@ public class Pet {
     public void setVaccines(List<Vacina> vaccines) { this.vaccines = vaccines; }
     public Tutor getOwner() { return tutor; }
     public void setOwner(Tutor tutor) { this.tutor = tutor; }
+    public Tutor getTutor() { return tutor; }
+    public void setTutor(Tutor tutor) { this.tutor = tutor; }
+
+    public void validarObrigatorios() {
+        if (species == null || species.isBlank()) {
+            throw new IllegalArgumentException("Espécie é obrigatória");
+        }
+        if (birthDate == null) {
+            throw new IllegalArgumentException("Data de nascimento é obrigatória");
+        }
+        if (vaccines == null || vaccines.isEmpty()) {
+            throw new IllegalArgumentException("Vacinas são obrigatórias");
+        }
+    }
 }

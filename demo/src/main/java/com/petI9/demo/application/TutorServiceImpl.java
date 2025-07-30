@@ -2,59 +2,63 @@ package com.petI9.demo.application;
 
 import com.petI9.demo.domain.Tutor;
 import com.petI9.demo.domain.Pet;
-import com.petI9.demo.infrastructure.InMemoryTutorRepository;
+import com.petI9.demo.repository.TutorRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Iterator;
 
+@Service
 public class TutorServiceImpl implements TutorService {
-    private final InMemoryTutorRepository repo = new InMemoryTutorRepository();
+    @Autowired
+    private TutorRepository tutorRepository;
 
     @Override
     public Tutor cadastrarTutor(Tutor tutor) {
-        if (repo.existsByNome(tutor.getNome())) {
+        // Exemplo de regra: não permitir dois tutores com o mesmo nome
+        if (tutorRepository.existsByNameIgnoreCase(tutor.getName())) {
             throw new IllegalArgumentException("Já existe um tutor com esse nome.");
         }
+        // Não permitir dois pets para o mesmo tutor com o mesmo nome
         if (tutor.getPets() != null) {
             for (Pet pet : tutor.getPets()) {
-                long count = tutor.getPets().stream().filter(p -> p.getNome().equalsIgnoreCase(pet.getNome())).count();
+                long count = tutor.getPets().stream().filter(p -> p.getName().equalsIgnoreCase(pet.getName())).count();
                 if (count > 1) {
                     throw new IllegalArgumentException("Não pode haver dois pets com o mesmo nome para o mesmo tutor.");
                 }
             }
         }
-        return repo.save(tutor);
+        return tutorRepository.save(tutor);
     }
 
     @Override
     public Tutor consultarPorId(Long id) {
-        return repo.findById(id);
+        return tutorRepository.findById(id).orElse(null);
     }
 
     @Override
     public List<Tutor> consultarPorNome(String nome) {
-        return repo.findByNome(nome);
+        return tutorRepository.findByNameContainingIgnoreCase(nome);
     }
 
     @Override
     public List<Tutor> listarTodos() {
-        return repo.findAll();
+        return tutorRepository.findAll();
     }
 
     @Override
-    public boolean removerPetDoTutor(Long tutorId, Long petId) {
-        Tutor tutor = repo.findById(tutorId);
-        if (tutor == null || tutor.getPets() == null) return false;
-        Iterator<Pet> it = tutor.getPets().iterator();
-        boolean removed = false;
-        while (it.hasNext()) {
-            Pet pet = it.next();
-            if (pet.getId().equals(petId)) {
-                it.remove();
-                removed = true;
-                break;
-            }
-        }
-        if (removed) repo.save(tutor);
-        return removed;
+    public Tutor atualizarTutor(Long id, Tutor tutor) {
+        Tutor existente = tutorRepository.findById(id).orElse(null);
+        if (existente == null) return null;
+        existente.setName(tutor.getName());
+        existente.setNickname(tutor.getNickname());
+        existente.setBirthDate(tutor.getBirthDate());
+        existente.setPets(tutor.getPets());
+        return tutorRepository.save(existente);
+    }
+
+    @Override
+    public void removerTutor(Long id) {
+        tutorRepository.deleteById(id);
     }
 }

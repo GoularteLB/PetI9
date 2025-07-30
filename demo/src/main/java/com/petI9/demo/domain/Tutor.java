@@ -25,4 +25,12 @@ public class Tutor {
     public void setBirthDate(LocalDate birthDate) { this.birthDate = birthDate; }
     public List<Pet> getPets() { return pets; }
     public void setPets(List<Pet> pets) { this.pets = pets; }
+    public Object getApelido() {
+      
+        throw new UnsupportedOperationException("Unimplemented method 'getApelido'");
+    }
+    public Object getDataNascimento() {
+
+        throw new UnsupportedOperationException("Unimplemented method 'getDataNascimento'");
+    }
 }

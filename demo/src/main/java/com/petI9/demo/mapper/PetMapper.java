@@ -1,16 +1,17 @@
 package com.petI9.demo.mapper;
 
 import com.petI9.demo.domain.Pet;
+import com.petI9.demo.domain.Tutor;
+import com.petI9.demo.domain.Vacina;
 import com.petI9.demo.domain.Pet.Breed;
-import com.petI9.demo.domain.Owner;
-import com.petI9.demo.domain.Vaccine;
+
 import com.petI9.demo.dto.PetDTO;
 import com.petI9.demo.dto.VaccineDTO;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class PetMapper {
-    public static Pet toEntity(PetDTO dto, Owner owner) {
+    public static Pet toEntity(PetDTO dto, Tutor owner) {
         Pet pet = new Pet();
         pet.setId(dto.getId());
         pet.setName(dto.getName());
@@ -20,8 +21,8 @@ public class PetMapper {
         pet.setColor(dto.getColor());
         pet.setWeight(dto.getWeight());
         if (dto.getVaccines() != null) {
-            List<Vaccine> vaccines = dto.getVaccines().stream().map(v -> {
-                Vaccine vac = new Vaccine();
+            List<Vacina> vaccines = dto.getVaccines().stream().map(v -> {
+                Vacina vac = new Vacina();
                 vac.setType(v.getType());
                 vac.setDate(v.getDate());
                 return vac;

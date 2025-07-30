@@ -1,7 +1,7 @@
 package com.petI9.demo.mapper;
 
 import com.petI9.demo.domain.Tutor;
-import com.petI9.demo.domain.Pet;
+
 import com.petI9.demo.dto.TutorDTO;
 import com.petI9.demo.dto.PetDTO;
 import java.util.List;
