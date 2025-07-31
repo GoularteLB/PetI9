@@ -1,17 +1,22 @@
 package com.petI9.demo.domain;
 
-import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
-<<<<<<< HEAD
 
-@Entity
-=======
-import lombok.Data;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
@@ -19,7 +24,6 @@ import lombok.EqualsAndHashCode;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
->>>>>>> master
 public class Pet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

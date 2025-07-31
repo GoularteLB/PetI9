@@ -1,11 +1,11 @@
 package com.petI9.demo.mapper;
 
-import com.petI9.demo.domain.Tutor;
-
-import com.petI9.demo.dto.TutorDTO;
-import com.petI9.demo.dto.PetDTO;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import com.petI9.demo.domain.Tutor;
+import com.petI9.demo.dto.PetDTO;
+import com.petI9.demo.dto.TutorDTO;
 
 public class TutorMapper {
     public static TutorDTO toDTO(Tutor tutor) {
@@ -27,10 +27,6 @@ public class TutorMapper {
         tutor.setName(dto.getNome());
         tutor.setNickname(dto.getApelido());
         tutor.setBirthDate(dto.getDataNascimento());
-<<<<<<< HEAD
-        // Pets devem ser associados separadamente, pois precisam do tutor
-=======
->>>>>>> master
         return tutor;
     }
 }

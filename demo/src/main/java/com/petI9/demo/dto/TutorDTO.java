@@ -9,10 +9,6 @@ public class TutorDTO {
     private String apelido;
     private LocalDate dataNascimento;
     private List<PetDTO> pets;
-<<<<<<< HEAD
-    // getters e setters
-=======
->>>>>>> master
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public String getNome() { return nome; }

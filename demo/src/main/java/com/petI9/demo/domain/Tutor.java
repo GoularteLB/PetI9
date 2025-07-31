@@ -1,17 +1,19 @@
 package com.petI9.demo.domain;
 
-import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
-<<<<<<< HEAD
 
-@Entity
-=======
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
@@ -19,7 +21,6 @@ import lombok.EqualsAndHashCode;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
->>>>>>> master
 public class Tutor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,10 +42,6 @@ public class Tutor {
     public List<Pet> getPets() { return pets; }
     public void setPets(List<Pet> pets) { this.pets = pets; }
     public Object getApelido() {
-<<<<<<< HEAD
-      
-=======
->>>>>>> master
         throw new UnsupportedOperationException("Unimplemented method 'getApelido'");
     }
     public Object getDataNascimento() {
