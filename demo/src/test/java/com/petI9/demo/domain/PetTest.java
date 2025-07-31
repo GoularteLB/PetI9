@@ -1,11 +1,27 @@
 package com.petI9.demo.domain;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+
+import com.petI9.demo.application.PetServiceImpl;
+import com.petI9.demo.repository.PetRepository;
+
 import java.time.LocalDate;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PetTest {
+
+ @Mock
+    PetRepository petRepository;
+
+  @InjectMocks
+    PetServiceImpl petService;
+
+
+
+
     @Test
     void testValidarObrigatoriosComSucesso() {
         Pet pet = new Pet();

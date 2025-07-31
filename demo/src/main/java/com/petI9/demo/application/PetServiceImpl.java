@@ -2,7 +2,6 @@ package com.petI9.demo.application;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.petI9.demo.domain.Pet;
@@ -12,10 +11,13 @@ import com.petI9.demo.repository.TutorRepository;
 
 @Service
 public class PetServiceImpl implements PetService {
-    @Autowired
-    private PetRepository petRepo;
-    @Autowired
-    private TutorRepository tutorRepo;
+    private final PetRepository petRepo;
+    private final TutorRepository tutorRepo;
+
+    public PetServiceImpl(PetRepository petRepo, TutorRepository tutorRepo) {
+        this.petRepo = petRepo;
+        this.tutorRepo = tutorRepo;
+    }
 
     @Override
     public Pet cadastrarPet(Pet pet) {

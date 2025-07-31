@@ -35,4 +35,14 @@ public class TutorController {
     public List<Tutor> listarTodos() {
         return tutorService.listarTodos();
     }
+
+    @PutMapping("/{id}")
+    public Tutor atualizarTutor(@PathVariable Long id, @RequestBody Tutor tutor) {
+        return tutorService.atualizarTutor(id, tutor);
+    }
+
+    @DeleteMapping("/{id}")
+    public void removerTutor(@PathVariable Long id) {
+        tutorService.removerTutor(id);
+    }
 }

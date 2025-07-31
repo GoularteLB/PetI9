@@ -34,9 +34,17 @@ public class PetController {
         return petService.listarPets();
     }
 
+    public static class NameDTO {
+        public String name;
+    }
+
     @PutMapping("/{id}/name")
-    public Pet editarNome(@PathVariable Long id, @RequestBody String newName) {
-        return petService.editarNome(id, newName);
+    public Pet editarNome(@PathVariable Long id, @RequestBody NameDTO dto) {
+        Pet pet = petService.editarNome(id, dto.name);
+        if (pet == null) {
+            throw new IllegalArgumentException("Pet não encontrado");
+        }
+        return pet;
     }
 
     @DeleteMapping("/{id}")
