@@ -27,7 +27,10 @@ public class TutorMapper {
         tutor.setName(dto.getNome());
         tutor.setNickname(dto.getApelido());
         tutor.setBirthDate(dto.getDataNascimento());
+<<<<<<< HEAD
         // Pets devem ser associados separadamente, pois precisam do tutor
+=======
+>>>>>>> master
         return tutor;
     }
 }

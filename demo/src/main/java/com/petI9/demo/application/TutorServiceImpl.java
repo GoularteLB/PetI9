@@ -6,7 +6,11 @@ import com.petI9.demo.repository.TutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+<<<<<<< HEAD
 import java.util.Iterator;
+=======
+
+>>>>>>> master
 
 @Service
 public class TutorServiceImpl implements TutorService {
@@ -15,11 +19,20 @@ public class TutorServiceImpl implements TutorService {
 
     @Override
     public Tutor cadastrarTutor(Tutor tutor) {
+<<<<<<< HEAD
         // Exemplo de regra: não permitir dois tutores com o mesmo nome
         if (tutorRepository.existsByNameIgnoreCase(tutor.getName())) {
             throw new IllegalArgumentException("Já existe um tutor com esse nome.");
         }
         // Não permitir dois pets para o mesmo tutor com o mesmo nome
+=======
+        if (tutor.getName() == null || tutor.getName().isEmpty()) {
+            throw new IllegalArgumentException("Nome do tutor é obrigatório.");
+        }
+        if (tutorRepository.existsByNameIgnoreCase(tutor.getName())) {
+            throw new IllegalArgumentException("Já existe um tutor com esse nome.");
+        }
+>>>>>>> master
         if (tutor.getPets() != null) {
             for (Pet pet : tutor.getPets()) {
                 long count = tutor.getPets().stream().filter(p -> p.getName().equalsIgnoreCase(pet.getName())).count();

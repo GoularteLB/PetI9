@@ -2,7 +2,22 @@ package com.petI9.demo.domain;
 
 import jakarta.persistence.Embeddable;
 import java.time.LocalDate;
+<<<<<<< HEAD
 
+=======
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
+>>>>>>> master
 @Embeddable
 public class Vacina {
     private String type;

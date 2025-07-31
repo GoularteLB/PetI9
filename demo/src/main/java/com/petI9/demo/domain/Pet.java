@@ -3,8 +3,23 @@ package com.petI9.demo.domain;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
+<<<<<<< HEAD
 
 @Entity
+=======
+import lombok.Data;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+
+@Entity
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
+>>>>>>> master
 public class Pet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
