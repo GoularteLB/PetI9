@@ -40,9 +40,15 @@ class TutorControllerTest {
 
         Mockito.when(tutorService.cadastrarTutor(any(Tutor.class))).thenReturn(tutor);
 
+        String json = "{" +
+                "\"id\":1," +
+                "\"name\":\"João\"," +
+                "\"nickname\":\"Joca\"," +
+                "\"birthDate\":\"1980-05-10\"}";
+
         mockMvc.perform(post("/tutores")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(tutor)))
+                .content(json))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1L))
                 .andExpect(jsonPath("$.name").value("João"));
@@ -53,6 +59,8 @@ class TutorControllerTest {
         Tutor tutor = new Tutor();
         tutor.setId(2L);
         tutor.setName("Maria");
+        tutor.setNickname("Mari");
+        tutor.setBirthDate(LocalDate.of(1990, 1, 1));
 
         Mockito.when(tutorService.consultarPorId(2L)).thenReturn(tutor);
 
@@ -67,6 +75,8 @@ class TutorControllerTest {
         Tutor tutor = new Tutor();
         tutor.setId(3L);
         tutor.setName("Carlos");
+        tutor.setNickname("Carlinhos");
+        tutor.setBirthDate(LocalDate.of(1995, 2, 2));
 
         Mockito.when(tutorService.consultarPorNome("Carlos")).thenReturn(List.of(tutor));
 
@@ -80,9 +90,13 @@ class TutorControllerTest {
         Tutor t1 = new Tutor();
         t1.setId(1L);
         t1.setName("João");
+        t1.setNickname("Joca");
+        t1.setBirthDate(LocalDate.of(1980, 5, 10));
         Tutor t2 = new Tutor();
         t2.setId(2L);
         t2.setName("Maria");
+        t2.setNickname("Mari");
+        t2.setBirthDate(LocalDate.of(1990, 1, 1));
 
         Mockito.when(tutorService.listarTodos()).thenReturn(List.of(t1, t2));
 
@@ -102,9 +116,15 @@ class TutorControllerTest {
 
         Mockito.when(tutorService.atualizarTutor(Mockito.eq(1L), any(Tutor.class))).thenReturn(tutor);
 
+        String json = "{" +
+                "\"id\":1," +
+                "\"name\":\"João Atualizado\"," +
+                "\"nickname\":\"Joca\"," +
+                "\"birthDate\":\"1980-05-10\"}";
+
         mockMvc.perform(put("/tutores/1")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(tutor)))
+                .content(json))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("João Atualizado"));
     }

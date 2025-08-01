@@ -4,7 +4,8 @@ package com.petI9.demo.controller;
 import org.springframework.web.bind.annotation.*;
 
 import com.petI9.demo.application.TutorServiceImpl;
-import com.petI9.demo.domain.Tutor;
+import com.petI9.demo.dto.TutorDTO;
+import com.petI9.demo.mapper.TutorMapper;
 
 import java.util.List;
 
@@ -17,28 +18,32 @@ public class TutorController {
         this.tutorService = tutorService;
     }
     @PostMapping
-    public Tutor cadastrarTutor(@RequestBody Tutor tutor) {
-        return tutorService.cadastrarTutor(tutor);
+    public TutorDTO cadastrarTutor(@RequestBody TutorDTO tutorDTO) {
+        return TutorMapper.toDTO(tutorService.cadastrarTutor(TutorMapper.toEntity(tutorDTO)));
     }
 
     @GetMapping("/{id}")
-    public Tutor consultarPorId(@PathVariable Long id) {
-        return tutorService.consultarPorId(id);
+    public TutorDTO consultarPorId(@PathVariable Long id) {
+        return TutorMapper.toDTO(tutorService.consultarPorId(id));
     }
 
     @GetMapping("/search")
-    public List<Tutor> consultarPorNome(@RequestParam String nome) {
-        return tutorService.consultarPorNome(nome);
+    public List<TutorDTO> consultarPorNome(@RequestParam String nome) {
+        return tutorService.consultarPorNome(nome).stream().map(TutorMapper::toDTO).toList();
     }
 
     @GetMapping
-    public List<Tutor> listarTodos() {
-        return tutorService.listarTodos();
+    public List<TutorDTO> listarTodos() {
+        return tutorService.listarTodos().stream().map(TutorMapper::toDTO).toList();
     }
 
     @PutMapping("/{id}")
-    public Tutor atualizarTutor(@PathVariable Long id, @RequestBody Tutor tutor) {
-        return tutorService.atualizarTutor(id, tutor);
+    public TutorDTO atualizarTutor(@PathVariable Long id, @RequestBody TutorDTO tutorDTO) {
+        var updated = tutorService.atualizarTutor(id, TutorMapper.toEntity(tutorDTO));
+        if (updated == null) {
+            return null;
+        }
+        return TutorMapper.toDTO(updated);
     }
 
     @DeleteMapping("/{id}")

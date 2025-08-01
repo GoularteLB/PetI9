@@ -2,6 +2,8 @@ package com.petI9.demo.controller;
 
 import com.petI9.demo.domain.Pet;
 import com.petI9.demo.application.PetService;
+import com.petI9.demo.dto.PetDTO;
+import com.petI9.demo.mapper.PetMapper;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -15,23 +17,24 @@ public class PetController {
     }
 
     @PostMapping
-    public Pet cadastrarPet(@RequestBody Pet pet) {
-        return petService.cadastrarPet(pet);
+    public PetDTO cadastrarPet(@RequestBody PetDTO petDTO) {
+
+        return PetMapper.toDTO(petService.cadastrarPet(PetMapper.toEntity(petDTO, null)));
     }
 
     @GetMapping("/{id}")
-    public Pet consultarPorId(@PathVariable Long id) {
-        return petService.consultarPorId(id);
+    public PetDTO consultarPorId(@PathVariable Long id) {
+        return PetMapper.toDTO(petService.consultarPorId(id));
     }
 
     @GetMapping("/search")
-    public List<Pet> consultarPorNome(@RequestParam String name) {
-        return petService.consultarPorNome(name);
+    public List<PetDTO> consultarPorNome(@RequestParam String name) {
+        return petService.consultarPorNome(name).stream().map(PetMapper::toDTO).toList();
     }
 
     @GetMapping
-    public List<Pet> listarTodos() {
-        return petService.listarPets();
+    public List<PetDTO> listarTodos() {
+        return petService.listarPets().stream().map(PetMapper::toDTO).toList();
     }
 
     public static class NameDTO {
@@ -39,12 +42,12 @@ public class PetController {
     }
 
     @PutMapping("/{id}/name")
-    public Pet editarNome(@PathVariable Long id, @RequestBody NameDTO dto) {
+    public PetDTO editarNome(@PathVariable Long id, @RequestBody NameDTO dto) {
         Pet pet = petService.editarNome(id, dto.name);
         if (pet == null) {
             throw new IllegalArgumentException("Pet não encontrado");
         }
-        return pet;
+        return PetMapper.toDTO(pet);
     }
 
     @DeleteMapping("/{id}")

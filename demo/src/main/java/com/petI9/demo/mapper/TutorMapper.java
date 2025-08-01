@@ -11,9 +11,9 @@ public class TutorMapper {
     public static TutorDTO toDTO(Tutor tutor) {
         TutorDTO dto = new TutorDTO();
         dto.setId(tutor.getId());
-        dto.setNome(tutor.getName());
-        dto.setApelido(tutor.getNickname());
-        dto.setDataNascimento(tutor.getBirthDate());
+        dto.setName(tutor.getName());
+        dto.setNickname(tutor.getNickname());
+        dto.setBirthDate(tutor.getBirthDate());
         if (tutor.getPets() != null) {
             List<PetDTO> pets = tutor.getPets().stream().map(PetMapper::toDTO).collect(Collectors.toList());
             dto.setPets(pets);
@@ -24,9 +24,9 @@ public class TutorMapper {
     public static Tutor toEntity(TutorDTO dto) {
         Tutor tutor = new Tutor();
         tutor.setId(dto.getId());
-        tutor.setName(dto.getNome());
-        tutor.setNickname(dto.getApelido());
-        tutor.setBirthDate(dto.getDataNascimento());
+        tutor.setName(dto.getName());
+        tutor.setNickname(dto.getNickname());
+        tutor.setBirthDate(dto.getBirthDate());
         return tutor;
     }
 }
