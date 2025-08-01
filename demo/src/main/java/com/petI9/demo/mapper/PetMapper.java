@@ -6,7 +6,7 @@ import com.petI9.demo.domain.Vacina;
 import com.petI9.demo.domain.Pet.Breed;
 
 import com.petI9.demo.dto.PetDTO;
-import com.petI9.demo.dto.VaccineDTO;
+import com.petI9.demo.dto.VacinaDTO;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,8 +43,8 @@ public class PetMapper {
         dto.setColor(pet.getColor());
         dto.setWeight(pet.getWeight());
         if (pet.getVaccines() != null) {
-            List<VaccineDTO> vaccines = pet.getVaccines().stream().map(v -> {
-                VaccineDTO vac = new VaccineDTO();
+            List<VacinaDTO> vaccines = pet.getVaccines().stream().map(v -> {
+                VacinaDTO vac = new VacinaDTO();
                 vac.setType(v.getType());
                 vac.setDate(v.getDate());
                 return vac;

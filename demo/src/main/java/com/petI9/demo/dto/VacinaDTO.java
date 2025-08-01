@@ -2,7 +2,7 @@ package com.petI9.demo.dto;
 
 import java.time.LocalDate;
 
-public class VaccineDTO {
+public class VacinaDTO {
     private String type;
     private LocalDate date;
     public String getType() { return type; }

@@ -11,7 +11,7 @@ public class PetDTO {
     private LocalDate birthDate;
     private String color;
     private Double weight;
-    private List<VaccineDTO> vaccines;
+    private List<VacinaDTO> vaccines;
     private Long ownerId;
 
     public Long getId() { return id; }
@@ -28,8 +28,8 @@ public class PetDTO {
     public void setColor(String color) { this.color = color; }
     public Double getWeight() { return weight; }
     public void setWeight(Double weight) { this.weight = weight; }
-    public List<VaccineDTO> getVaccines() { return vaccines; }
-    public void setVaccines(List<VaccineDTO> vaccines) { this.vaccines = vaccines; }
+    public List<VacinaDTO> getVaccines() { return vaccines; }
+    public void setVaccines(List<VacinaDTO> vaccines) { this.vaccines = vaccines; }
     public Long getOwnerId() { return ownerId; }
     public void setOwnerId(Long ownerId) { this.ownerId = ownerId; }
 }

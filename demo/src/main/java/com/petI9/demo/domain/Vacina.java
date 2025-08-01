@@ -20,15 +20,12 @@ public class Vacina {
     @EqualsAndHashCode.Include
     private String type;
     private LocalDate date;
-    // For test compatibility only
-    private Long id; // not persisted
-    private String manufacturer; // not persisted
+    private Long id;
+    private String manufacturer;
     public String getType() { return type; }
     public void setType(String type) { this.type = type; }
     public LocalDate getDate() { return date; }
     public void setDate(LocalDate date) { this.date = date; }
-
-    // Add test-only methods for compatibility with tests
     public String getName() { return type; }
     public void setName(String name) { this.type = name; }
     public String getManufacturer() { return manufacturer; }
@@ -44,5 +41,18 @@ public class Vacina {
                 ", date=" + date +
                 ", manufacturer='" + manufacturer + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Vacina vacina = (Vacina) o;
+        return type != null && type.equals(vacina.type);
+    }
+
+    @Override
+    public int hashCode() {
+        return type != null ? type.hashCode() : 0;
     }
 }
