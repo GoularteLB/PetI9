@@ -3,8 +3,11 @@ package com.petI9.demo.dto;
 import java.time.LocalDate;
 import java.util.List;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class TutorDTO {
     private Long id;
+    @NotBlank
     private String name;
     private String nickname;
     private LocalDate birthDate;

@@ -1,7 +1,7 @@
 package com.petI9.demo.controller;
 
 import com.petI9.demo.domain.Pet;
-import com.petI9.demo.application.PetService;
+import com.petI9.demo.service.*;
 import com.petI9.demo.dto.PetDTO;
 import com.petI9.demo.mapper.PetMapper;
 import org.springframework.web.bind.annotation.*;

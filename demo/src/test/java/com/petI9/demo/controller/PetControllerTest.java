@@ -1,9 +1,10 @@
 package com.petI9.demo.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.petI9.demo.application.PetServiceImpl;
 import com.petI9.demo.domain.Pet;
 import com.petI9.demo.domain.Vacina;
+import com.petI9.demo.service.PetService;
+
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ class PetControllerTest {
     MockMvc mockMvc;
 
     @MockBean
-    PetServiceImpl petService;
+    PetService petService;
 
     @Autowired
     ObjectMapper objectMapper;

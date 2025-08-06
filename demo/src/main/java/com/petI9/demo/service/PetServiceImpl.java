@@ -1,4 +1,4 @@
-package com.petI9.demo.application;
+package com.petI9.demo.service;
 
 import java.util.List;
 
@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 
 import com.petI9.demo.domain.Pet;
 import com.petI9.demo.domain.Tutor;
+import com.petI9.demo.exceptions.RegistroNaoEncontradoException;
+import com.petI9.demo.exceptions.RegraDeNegocioException;
 import com.petI9.demo.repository.PetRepository;
 import com.petI9.demo.repository.TutorRepository;
 
@@ -22,14 +24,14 @@ public class PetServiceImpl implements PetService {
     @Override
     public Pet cadastrarPet(Pet pet) {
         if (pet.getTutor() == null || pet.getTutor().getId() == null) {
-            throw new IllegalArgumentException("Tutor é obrigatório");
+            throw new RegraDeNegocioException("Tutor é obrigatório");
         }
         Tutor tutor = tutorRepo.findById(pet.getTutor().getId()).orElse(null);
         if (tutor == null) {
-            throw new IllegalArgumentException("Tutor não encontrado");
+            throw new RegistroNaoEncontradoException("Tutor não encontrado");
         }
         if (petRepo.existsByNameIgnoreCaseAndTutorId(pet.getName(), tutor.getId())) {
-    throw new IllegalArgumentException("Já existe um pet com esse nome para este tutor");
+    throw new RegraDeNegocioException("Já existe um pet com esse nome para este tutor");
 }
         pet.setTutor(tutor);
         Pet novoPet = petRepo.save(pet);

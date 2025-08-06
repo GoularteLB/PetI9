@@ -3,18 +3,19 @@ package com.petI9.demo.controller;
 
 import org.springframework.web.bind.annotation.*;
 
-import com.petI9.demo.application.TutorServiceImpl;
+
 import com.petI9.demo.dto.TutorDTO;
 import com.petI9.demo.mapper.TutorMapper;
+import com.petI9.demo.service.TutorService;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/tutores")
 public class TutorController {
-    private final TutorServiceImpl tutorService;
+    private final TutorService tutorService;
 
-    public TutorController(TutorServiceImpl tutorService) {
+    public TutorController(TutorService tutorService) {
         this.tutorService = tutorService;
     }
     @PostMapping

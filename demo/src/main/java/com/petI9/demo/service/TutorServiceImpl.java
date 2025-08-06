@@ -1,4 +1,4 @@
-package com.petI9.demo.application;
+package com.petI9.demo.service;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.petI9.demo.domain.Pet;
 import com.petI9.demo.domain.Tutor;
+import com.petI9.demo.exceptions.RegraDeNegocioException;
 import com.petI9.demo.repository.TutorRepository;
 
 @Service
@@ -17,7 +18,7 @@ public class TutorServiceImpl implements TutorService {
     @Override
     public Tutor cadastrarTutor(Tutor tutor) {
         if (tutor.getName() == null || tutor.getName().isEmpty()) {
-            throw new IllegalArgumentException("Nome do tutor é obrigatório.");
+            throw new RegraDeNegocioException("Nome do tutor é obrigatório.");
         }
         if (tutorRepository.existsByNameIgnoreCase(tutor.getName())) {
             throw new IllegalArgumentException("Já existe um tutor com esse nome.");
@@ -26,7 +27,7 @@ public class TutorServiceImpl implements TutorService {
             for (Pet pet : tutor.getPets()) {
                 long count = tutor.getPets().stream().filter(p -> p.getName().equalsIgnoreCase(pet.getName())).count();
                 if (count > 1) {
-                    throw new IllegalArgumentException("Não pode haver dois pets com o mesmo nome para o mesmo tutor.");
+                    throw new RegraDeNegocioException("Não pode haver dois pets com o mesmo nome para o mesmo tutor.");
                 }
             }
         }

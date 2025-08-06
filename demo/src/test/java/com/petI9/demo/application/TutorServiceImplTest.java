@@ -3,6 +3,8 @@ package com.petI9.demo.application;
 import com.petI9.demo.domain.Tutor;
 import com.petI9.demo.domain.Pet;
 import com.petI9.demo.repository.TutorRepository;
+import com.petI9.demo.service.TutorService;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -20,7 +22,7 @@ class TutorServiceImplTest {
     TutorRepository tutorRepository;
 
     @InjectMocks
-    TutorServiceImpl service;
+    TutorService service;
 
     @Test
     void testCadastrarTutorComSucesso() {
