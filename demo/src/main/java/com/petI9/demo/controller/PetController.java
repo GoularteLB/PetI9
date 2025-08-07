@@ -2,6 +2,9 @@ package com.petI9.demo.controller;
 
 import com.petI9.demo.domain.Pet;
 import com.petI9.demo.service.*;
+
+import jakarta.validation.Valid;
+
 import com.petI9.demo.dto.PetDTO;
 import com.petI9.demo.mapper.PetMapper;
 import org.springframework.web.bind.annotation.*;
@@ -17,9 +20,9 @@ public class PetController {
     }
 
     @PostMapping
-    public PetDTO cadastrarPet(@RequestBody PetDTO petDTO) {
+    public PetDTO cadastrarPet(@RequestBody @Valid PetDTO petDTO) {
 
-        return PetMapper.toDTO(petService.cadastrarPet(PetMapper.toEntity(petDTO, null)));
+        return PetMapper.toDTO(petService.cadastrarPet(PetMapper.toEntity(petDTO)));
     }
 
     @GetMapping("/{id}")
@@ -42,8 +45,8 @@ public class PetController {
     }
 
     @PutMapping("/{id}/name")
-    public PetDTO editarNome(@PathVariable Long id, @RequestBody NameDTO dto) {
-        Pet pet = petService.editarNome(id, dto.name);
+    public PetDTO Update(@PathVariable Long id, @RequestBody @Valid PetDTO dto) {
+        Pet pet = petService.editarNome(id, dto.getName());
         if (pet == null) {
             throw new IllegalArgumentException("Pet não encontrado");
         }

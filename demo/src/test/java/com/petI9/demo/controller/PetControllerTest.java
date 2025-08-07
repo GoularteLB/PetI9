@@ -3,13 +3,14 @@ package com.petI9.demo.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.petI9.demo.domain.Pet;
 import com.petI9.demo.domain.Vacina;
+import com.petI9.demo.enums.PetSpecies;
 import com.petI9.demo.service.PetService;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -26,7 +27,7 @@ class PetControllerTest {
     @Autowired
     MockMvc mockMvc;
 
-    @MockBean
+    @Mock
     PetService petService;
 
     @Autowired
@@ -37,7 +38,7 @@ class PetControllerTest {
         Pet pet = new Pet();
         pet.setId(1L);
         pet.setName("Rex");
-        pet.setSpecies("Cachorro");
+        pet.setSpecies(PetSpecies.DOG);
         pet.setBirthDate(LocalDate.of(2020, 1, 1));
         Vacina vacina = new Vacina();
         vacina.setType("Raiva");
@@ -59,7 +60,7 @@ class PetControllerTest {
         Pet pet = new Pet();
         pet.setId(2L);
         pet.setName("Mimi");
-        pet.setSpecies("Gato");
+        pet.setSpecies(PetSpecies.CAT);
 
         Mockito.when(petService.consultarPorId(2L)).thenReturn(pet);
 
@@ -74,7 +75,7 @@ class PetControllerTest {
         Pet pet = new Pet();
         pet.setId(3L);
         pet.setName("Bidu");
-        pet.setSpecies("Cachorro");
+        pet.setSpecies(PetSpecies.DOG);
 
         Mockito.when(petService.consultarPorNome("Bidu")).thenReturn(List.of(pet));
 
@@ -105,7 +106,7 @@ class PetControllerTest {
         Pet pet = new Pet();
         pet.setId(1L);
         pet.setName("RexNovo");
-        pet.setSpecies("Cachorro");
+        pet.setSpecies(PetSpecies.DOG);
         Mockito.when(petService.editarNome(1L, "RexNovo")).thenReturn(pet);
 
         mockMvc.perform(put("/pets/1/name")
@@ -155,7 +156,7 @@ class PetControllerTest {
     void testCadastrarPetTutorInexistente() throws Exception {
         Pet pet = new Pet();
         pet.setName("Rex");
-        pet.setSpecies("Cachorro");
+        pet.setSpecies(PetSpecies.DOG);
         pet.setBirthDate(LocalDate.of(2020, 1, 1));
         Vacina vacina = new Vacina();
         vacina.setType("Raiva");
@@ -173,7 +174,7 @@ class PetControllerTest {
     void testCadastrarPetNomeDuplicado() throws Exception {
         Pet pet = new Pet();
         pet.setName("Rex");
-        pet.setSpecies("Cachorro");
+        pet.setSpecies(PetSpecies.DOG);
         pet.setBirthDate(LocalDate.of(2020, 1, 1));
         Vacina vacina = new Vacina();
         vacina.setType("Raiva");

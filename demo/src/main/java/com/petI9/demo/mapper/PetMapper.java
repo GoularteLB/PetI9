@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class PetMapper {
-    public static Pet toEntity(PetDTO dto, Tutor owner) {
+    public static Pet toEntity(PetDTO dto) {
         Pet pet = new Pet();
         pet.setId(dto.getId());
         pet.setName(dto.getName());
@@ -29,7 +29,9 @@ public class PetMapper {
             }).collect(Collectors.toList());
             pet.setVaccines(vaccines);
         }
-        pet.setOwner(owner);
+        Tutor tutor = new Tutor();
+        tutor.setId(dto.getOwnerId());
+        pet.setTutor(tutor);
         return pet;
     }
 

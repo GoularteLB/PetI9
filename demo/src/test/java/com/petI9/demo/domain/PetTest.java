@@ -4,8 +4,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
-import com.petI9.demo.application.PetServiceImpl;
+import com.petI9.demo.enums.PetSpecies;
 import com.petI9.demo.repository.PetRepository;
+import com.petI9.demo.service.PetService;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -17,7 +18,7 @@ class PetTest {
     PetRepository petRepository;
 
   @InjectMocks
-    PetServiceImpl petService;
+    PetService petService;
 
 
 
@@ -25,7 +26,7 @@ class PetTest {
     @Test
     void testValidarObrigatoriosComSucesso() {
         Pet pet = new Pet();
-        pet.setSpecies("Cachorro");
+        pet.setSpecies(PetSpecies.DOG);
         pet.setBirthDate(LocalDate.of(2020, 1, 1));
         Vacina vacina = new Vacina();
         vacina.setType("Raiva");
@@ -37,7 +38,7 @@ class PetTest {
     @Test
     void testValidarObrigatoriosSemVacinas() {
         Pet pet = new Pet();
-        pet.setSpecies("Gato");
+        pet.setSpecies(PetSpecies.CAT);
         pet.setBirthDate(LocalDate.of(2020, 1, 1));
         pet.setVaccines(null);
         Exception ex = assertThrows(IllegalArgumentException.class, pet::validarObrigatorios);
@@ -47,7 +48,7 @@ class PetTest {
     @Test
     void testValidarObrigatoriosSemDataNascimento() {
         Pet pet = new Pet();
-        pet.setSpecies("Gato");
+        pet.setSpecies(PetSpecies.CAT);
         Vacina vacina = new Vacina();
         vacina.setType("Raiva");
         vacina.setDate(LocalDate.of(2021, 1, 1));
