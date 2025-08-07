@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.petI9.demo.domain.Pet;
 import com.petI9.demo.domain.Tutor;
+import com.petI9.demo.dto.PetDTO;
 import com.petI9.demo.exceptions.RegistroNaoEncontradoException;
 import com.petI9.demo.exceptions.RegraDeNegocioException;
 import com.petI9.demo.repository.PetRepository;
@@ -46,12 +47,17 @@ public class PetServiceImpl implements PetService {
     }
 
     @Override
-    public Pet editarNome(Long petId, String newName) {
-        Pet pet = petRepo.findById(petId).orElseThrow(() -> new IllegalArgumentException("Pet não encontrado"));
-        if (petRepo.existsByNameIgnoreCaseAndTutorId(newName, pet.getTutor().getId())) {
+    public Pet editar(Long petId, PetDTO petDTO) {
+        Pet pet = petRepo.findById(petId).orElseThrow(() -> new RegistroNaoEncontradoException("Pet não encontrado"));
+        if (petRepo.existsByNameIgnoreCaseAndTutorId(petDTO.getName(), pet.getTutor().getId())) {
     throw new IllegalArgumentException("Já existe um pet com esse nome para este tutor");
 }
-        pet.setName(newName);
+        pet.setName(petDTO.getName());
+        pet.setBirthDate(petDTO.getBirthDate());
+        pet.setSpecies(petDTO.getSpecies());
+        pet.setBreed(petDTO.getBreed() != null ? Pet.Breed.valueOf(petDTO.getBreed()) : null);
+        pet.setColor(petDTO.getColor());
+        pet.setWeight(petDTO.getWeight());
         return petRepo.save(pet);
     }
 

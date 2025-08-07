@@ -3,7 +3,10 @@ package com.petI9.demo.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.petI9.demo.domain.Pet;
 import com.petI9.demo.domain.Vacina;
+import com.petI9.demo.dto.PetDTO;
 import com.petI9.demo.enums.PetSpecies;
+import com.petI9.demo.exceptions.RegistroNaoEncontradoException;
+import com.petI9.demo.mapper.PetMapper;
 import com.petI9.demo.service.PetService;
 
 import org.junit.jupiter.api.Test;
@@ -107,9 +110,9 @@ class PetControllerTest {
         pet.setId(1L);
         pet.setName("RexNovo");
         pet.setSpecies(PetSpecies.DOG);
-        Mockito.when(petService.editarNome(1L, "RexNovo")).thenReturn(pet);
+        Mockito.when(petService.editar(1L, PetMapper.toDTO(pet))).thenReturn(pet);
 
-        mockMvc.perform(put("/pets/1/name")
+        mockMvc.perform(put("/pets/1")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"name\":\"RexNovo\"}"))
                 .andExpect(status().isOk())
@@ -125,11 +128,11 @@ class PetControllerTest {
 
     @Test
     void testEditarNomePetNotFound() throws Exception {
-        Mockito.when(petService.editarNome(99L, "Ghost")).thenThrow(new IllegalArgumentException("Pet não encontrado"));
-        mockMvc.perform(put("/pets/99/name")
+        Mockito.when(petService.editar(99L, new PetDTO())).thenThrow(new RegistroNaoEncontradoException("Pet não encontrado"));
+        mockMvc.perform(put("/pets/99")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("\"Ghost\""))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isNotFound());
     }
 
     @Test

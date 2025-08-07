@@ -1,6 +1,8 @@
 package com.petI9.demo.service;
 
 import com.petI9.demo.domain.Pet;
+import com.petI9.demo.dto.PetDTO;
+
 import java.util.List;
 
 public interface PetService {
@@ -8,6 +10,6 @@ public interface PetService {
     List<Pet> listarPets();
     Pet consultarPorId(Long id);
     List<Pet> consultarPorNome(String name);
-    Pet editarNome(Long id, String newName);
+    Pet editar(Long id, PetDTO petDTO);
     void removerPet(Long id);
 }
