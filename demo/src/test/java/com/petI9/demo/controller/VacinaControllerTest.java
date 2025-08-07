@@ -35,7 +35,6 @@ class VacinaControllerTest {
         vacina.setId(1L);
         vacina.setName("Rabies");
         vacina.setDate(LocalDate.of(2023, 1, 1));
-        vacina.setManufacturer("Pfizer");
         Mockito.when(vacinaService.cadastrarVacina(any(Vacina.class))).thenReturn(vacina);
         mockMvc.perform(post("/vacinas")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -48,7 +47,6 @@ class VacinaControllerTest {
         Vacina vacina = new Vacina();
         vacina.setName("Rabies");
         vacina.setDate(LocalDate.of(2023, 1, 1));
-        vacina.setManufacturer("Pfizer");
         Mockito.when(vacinaService.cadastrarVacina(any(Vacina.class))).thenThrow(new IllegalArgumentException("Já existe uma vacina com esse nome."));
         mockMvc.perform(post("/vacinas")
                 .contentType(MediaType.APPLICATION_JSON)

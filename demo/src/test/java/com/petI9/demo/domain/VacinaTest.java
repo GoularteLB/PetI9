@@ -11,11 +11,10 @@ class VacinaTest {
         vacina.setId(Long.valueOf(1L));
         vacina.setName("Rabies");
         vacina.setDate(LocalDate.of(2023, 1, 1));
-        vacina.setManufacturer("Pfizer");
         assertEquals(Long.valueOf(1L), vacina.getId());
         assertEquals("Rabies", vacina.getName());
         assertEquals(LocalDate.of(2023, 1, 1), vacina.getDate());
-        assertEquals("Pfizer", vacina.getManufacturer());
+
     }
 
     @Test
@@ -46,11 +45,9 @@ class VacinaTest {
         vacina.setId(null);
         vacina.setName(null);
         vacina.setDate(null);
-        vacina.setManufacturer(null);
         assertNull(vacina.getId());
         assertNull(vacina.getName());
         assertNull(vacina.getDate());
-        assertNull(vacina.getManufacturer());
     }
 
     @Test
